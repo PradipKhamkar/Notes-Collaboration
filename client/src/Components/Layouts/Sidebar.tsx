@@ -11,56 +11,58 @@ import {
   Mail01Icon,
 } from "../Icons";
 import ThemeSwitch from "../Shared/ThemeSwticher";
+import { useNavigate, useLocation } from "react-router-dom";
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const options = [
     {
       label: "All Notes",
-      icon: <ProfileIcon className="text-white" height={20} width={20} />,
+      Icon: ProfileIcon,
       shortKey: "",
-      onClick: "",
+      path: "/",
     },
 
     {
       label: "Create Note",
-      icon: <AddCircleIcon className="text-black" height={20} width={20} />,
+      Icon: AddCircleIcon,
       shortKey: "",
-      onClick: "",
+      path: "/new",
     },
     {
       label: "Folders",
-      icon: <Folder01Icon className="text-black" height={20} width={20} />,
+      Icon: Folder01Icon,
       shortKey: "",
-      onClick: "",
+      path: "/folders",
     },
     {
       label: "Search",
-      icon: <Search01Icon className="text-black" height={20} width={20} />,
+      Icon: Search01Icon,
       shortKey: "",
-      onClick: "",
+      path: "/search",
     },
     {
       label: "Archives",
-      icon: <DatabaseSyncIcon className="text-black" height={20} width={20} />,
+      Icon: DatabaseSyncIcon,
       shortKey: "",
-      onClick: "",
+      path: "/archives",
     },
   ];
 
   const more = [
     {
       label: "Notification",
-      icon: (
-        <Notification02Icon className="text-black" height={20} width={20} />
-      ),
+      Icon: Notification02Icon,
       shortKey: "",
-      onClick: "",
+      path: "/notification",
     },
 
     {
       label: "Message",
-      icon: <Mail01Icon className="text-black" height={20} width={20} />,
+      Icon: Mail01Icon,
       shortKey: "",
-      onClick: "",
+      path: "/message",
     },
   ];
 
@@ -69,26 +71,26 @@ const Sidebar = () => {
   //     label: "All Notes",
   //     icon: <ProfileIcon className="text-white" height={20} width={20} />,
   //     shortKey: "",
-  //     onClick: "",
+  //   path: "",
   //   },
 
   //   {
   //     label: "Create Note",
   //     icon: <AddCircleIcon className="text-black" height={20} width={20} />,
   //     shortKey: "",
-  //     onClick: "",
+  //   path: "",
   //   },
   //   {
   //     label: "Search",
   //     icon: <Search01Icon className="text-black" height={20} width={20} />,
   //     shortKey: "",
-  //     onClick: "",
+  //   path: "",
   //   },
   //   {
   //     label: "Archives",
   //     icon: <DatabaseSyncIcon className="text-black" height={20} width={20} />,
   //     shortKey: "",
-  //     onClick: "",
+  //   path: "",
   //   },
   // ];
 
@@ -104,8 +106,8 @@ const Sidebar = () => {
     "Important",
   ];
   return (
-    <Wrapper>
-      <div className="bg-white h-[95vh] rounded-lg w-1/4 overflow-auto scrollbar-hide p-2 pb-5 text-sm flex flex-col justify-between ">
+    <>
+      <div className="h-[95vh] rounded-lg md:w-[300px] overflow-auto scrollbar-hide p-2 pb-5 text-sm flex flex-col justify-between ">
         <div className="">
           <div className="flex items-center gap-3">
             <Avatar
@@ -123,40 +125,66 @@ const Sidebar = () => {
 
           <div className="max-h-[98%] overflow-auto mt-8">
             <div className="px-2 gap-2 flex flex-col">
-              {options.map((option, index) => (
-                <div
-                  className={`cursor-pointer 
-              ${
-                index == 0 ? "bg-black text-white" : "bg-none text-black"
-              } rounded-xl flex items-center justify-between p-2 `}
-                  key={option.label}
-                >
-                  <div className="flex gap-2 items-center">
-                    {option.icon}
-                    <p className="text-sm">{option.label}</p>
+              {options.map((option, index) => {
+                const { Icon, label, path, shortKey } = option;
+                return (
+                  <div
+                    onClick={() => navigate(path)}
+                    className={`cursor-pointer ${
+                      pathname === path
+                        ? "bg-black text-white"
+                        : "bg-none text-black"
+                    } rounded-xl flex items-center justify-between p-2 `}
+                    key={label}
+                  >
+                    <div className="flex gap-2 items-center">
+                      <Icon
+                        className={`${
+                          pathname === path
+                            ? "bg-black text-white"
+                            : "text-black"
+                        } `}
+                        width={20}
+                        height={20}
+                      />
+                      <p className="text-sm">{label}</p>
+                    </div>
+                    <p>{shortKey}</p>
                   </div>
-                  <p>{option.shortKey}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
             <Divider className="bg-slate-200 my-3" />
 
             <div className="px-2 mt-5 gap-2 flex flex-col">
-              {more.map((option, index) => (
-                <div
-                  className={`cursor-pointer 
-              ${
-                index == 8 ? "bg-black text-white" : "bg-none text-black"
-              } rounded-xl flex items-center justify-between p-2 `}
-                  key={option.label}
-                >
-                  <div className="flex gap-2 items-center">
-                    {option.icon}
-                    <p className="text-sm">{option.label}</p>
+              {more.map((option, index) => {
+                const { Icon, label, path, shortKey } = option;
+                return (
+                  <div
+                    onClick={() => navigate(path)}
+                    className={`cursor-pointer ${
+                      pathname === path
+                        ? "bg-black text-white"
+                        : "bg-none text-black"
+                    } rounded-xl flex items-center justify-between p-2 `}
+                    key={label}
+                  >
+                    <div className="flex gap-2 items-center">
+                      <Icon
+                        className={`${
+                          pathname === path
+                            ? "bg-black text-white"
+                            : "text-black"
+                        } `}
+                        width={20}
+                        height={20}
+                      />
+                      <p className="text-sm">{label}</p>
+                    </div>
+                    <p>{shortKey}</p>
                   </div>
-                  <p>{option.shortKey}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -168,7 +196,7 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
-    </Wrapper>
+    </>
   );
 };
 
