@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/layouts/Sidebar";
-import Wrapper from "../Components/Layouts/Wrapper";
+import Wrapper from "../components/layouts/Wrapper";
 
 const Home = () => {
   return (
