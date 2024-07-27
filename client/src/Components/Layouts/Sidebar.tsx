@@ -1,5 +1,4 @@
 import React from "react";
-import Wrapper from "./Wrapper";
 import { Avatar, Divider, Accordion, AccordionItem } from "@nextui-org/react";
 import {
   AddCircleIcon,
@@ -10,7 +9,7 @@ import {
   Search01Icon,
   Mail01Icon,
 } from "../Icons";
-import ThemeSwitch from "../Shared/ThemeSwticher";
+import ThemeSwitch from "../shared/ThemeSwticher";
 import { useNavigate, useLocation } from "react-router-dom";
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -28,13 +27,13 @@ const Sidebar = () => {
       label: "Create Note",
       Icon: AddCircleIcon,
       shortKey: "",
-      path: "/new",
+      path: "/new-note",
     },
     {
       label: "Folders",
       Icon: Folder01Icon,
       shortKey: "",
-      path: "/folders",
+      path: "/folder",
     },
     {
       label: "Search",
