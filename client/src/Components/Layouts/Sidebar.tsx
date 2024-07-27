@@ -11,8 +11,10 @@ import {
 } from "../Icons";
 import ThemeSwitch from "../shared/ThemeSwticher";
 import { useNavigate, useLocation } from "react-router-dom";
+import useTheme from "../../hooks/useTheme";
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { toggleTheme, isDarkMode } = useTheme();
   const { pathname } = useLocation();
 
   const options = [
@@ -131,8 +133,8 @@ const Sidebar = () => {
                     onClick={() => navigate(path)}
                     className={`cursor-pointer ${
                       pathname === path
-                        ? "bg-black text-white"
-                        : "bg-none text-black"
+                        ? "bg-black dark:bg-green-600 text-white"
+                        : "bg-none text-black dark:text-white"
                     } rounded-xl flex items-center justify-between p-2 `}
                     key={label}
                   >
@@ -140,8 +142,8 @@ const Sidebar = () => {
                       <Icon
                         className={`${
                           pathname === path
-                            ? "bg-black text-white"
-                            : "text-black"
+                            ? " text-white"
+                            : "text-black dark:text-white"
                         } `}
                         width={20}
                         height={20}
@@ -153,7 +155,7 @@ const Sidebar = () => {
                 );
               })}
             </div>
-            <Divider className="bg-slate-200 my-3" />
+            <Divider className="bg-slate-200  dark:bg-slate-800 my-3" />
 
             <div className="px-2 mt-5 gap-2 flex flex-col">
               {more.map((option, index) => {
@@ -163,8 +165,8 @@ const Sidebar = () => {
                     onClick={() => navigate(path)}
                     className={`cursor-pointer ${
                       pathname === path
-                        ? "bg-black text-white"
-                        : "bg-none text-black"
+                        ? "bg-black dark:bg-green-600 text-white"
+                        : "bg-none text-black dark:text-white"
                     } rounded-xl flex items-center justify-between p-2 `}
                     key={label}
                   >
@@ -172,8 +174,8 @@ const Sidebar = () => {
                       <Icon
                         className={`${
                           pathname === path
-                            ? "bg-black text-white"
-                            : "text-black"
+                            ? " text-white"
+                            : "text-black dark:text-white"
                         } `}
                         width={20}
                         height={20}
@@ -188,10 +190,10 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="px-2 gap-2 flex flex-col">
-          <div className="flex gap-2 items-center bg-green-200 p-2 justify-between rounded-lg">
+        <div className="px-2 gap-2 flex flex-col backdrop-blur-md">
+          <div className="flex gap-2 items-center  p-2 justify-between rounded-lg">
             <p className="text-sm">Dark Mode</p>
-            <ThemeSwitch />
+            <ThemeSwitch checked={!isDarkMode} onChange={toggleTheme} />
           </div>
         </div>
       </div>
