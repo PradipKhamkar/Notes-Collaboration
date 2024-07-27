@@ -3,8 +3,6 @@ import Wrapper from "./Wrapper";
 import { Avatar, Divider, Accordion, AccordionItem } from "@nextui-org/react";
 import {
   AddCircleIcon,
-  ArrowDown01Icon,
-  ArrowRight01Icon,
   DatabaseSyncIcon,
   Folder01Icon,
   Notification02Icon,
