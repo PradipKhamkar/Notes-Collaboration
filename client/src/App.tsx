@@ -11,7 +11,7 @@ import Router from "./routes/index";
 const App = () => {
   return (
     <>
-      <NextUIProvider className="bg-[#f8f8fa] h-screen">
+      <NextUIProvider className="bg-[#f8f8fa] h-screen dark:bg-[#0f0e13]">
         <Router />
         {/* <BrowserRouter> */}
         {/* <Routes> */}
