@@ -1,7 +1,9 @@
 import Login from "../components/auth/Login";
 import SignUp from "../components/auth/SignUp";
-import AllNotes from "../pages/AllNotes";
+import ViewNotes from "../pages/ViewNotes";
 import NewNote from "../pages/NewNote";
+import ViewsNotes from "../pages/ViewNotes";
+import ViewFolders from "../pages/ViewFolders";
 
 export const publicRoute = [
   {
@@ -12,21 +14,21 @@ export const publicRoute = [
 ];
 
 export const protectedRoute = [
+  // {
+  //   path: "/",
+  //   name: "Dashboard",
+  //   Element: Dashboard,
+  // },
   {
     path: "/",
-    name: "All Notes",
-    Element: AllNotes,
+    name: "Notes",
+    Element: ViewsNotes,
   },
   {
-    path: "/new-note",
-    name: "New Note",
-    Element: NewNote,
+    path: "/folder",
+    name: "folder",
+    Element: ViewFolders,
   },
-  // {
-  //   path: "/folder",
-  //   name: "New Note",
-  //   Element: NewNote,
-  // },
 
   // {
   //   path: "/new-note",

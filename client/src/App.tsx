@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Header from "./components/layouts/Header";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AllNotes from "./pages/AllNotes";
+import AllNotes from "./pages/ViewNotes";
 import NewNote from "./pages/NewNote";
 import Router from "./routes/index";
 

@@ -8,6 +8,8 @@ import {
   ProfileIcon,
   Search01Icon,
   Mail01Icon,
+  Home13Icon,
+  NoteIcon,
 } from "../Icons";
 import ThemeSwitch from "../shared/ThemeSwticher";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -18,18 +20,18 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   const options = [
-    {
-      label: "All Notes",
-      Icon: ProfileIcon,
-      shortKey: "",
-      path: "/",
-    },
+    // {
+    //   label: "Dashboard",
+    //   Icon: Home13Icon,
+    //   shortKey: "",
+    //   path: "/",
+    // },
 
     {
-      label: "Create Note",
-      Icon: AddCircleIcon,
+      label: "Notes",
+      Icon: NoteIcon,
       shortKey: "",
-      path: "/new-note",
+      path: "/",
     },
     {
       label: "Folders",
@@ -108,7 +110,7 @@ const Sidebar = () => {
   ];
   return (
     <>
-      <div className="h-[95vh] rounded-lg md:w-[300px] overflow-auto scrollbar-hide p-2 pb-5 text-sm flex flex-col justify-between ">
+      <div className="h-[95vh] rounded-lg md:w-[300px] overflow-auto scrollbar-hide p-2 pb-5 flex flex-col justify-between text-[0.8rem]">
         <div className="">
           <div className="flex items-center gap-3">
             <Avatar
@@ -117,14 +119,14 @@ const Sidebar = () => {
               src="https://media.licdn.com/dms/image/D5603AQGbeRJ8DA3BBA/profile-displayphoto-shrink_200_200/0/1676695469014?e=1727308800&v=beta&t=m2KUy5j4SPC4xjNENY-MOBF4rs-Y1x1hRF6JPFUQhjY"
             />
             <div>
-              <p className="text-base">Pradip Khamkar</p>
-              <p className="text-[0.7rem] text-slate-300">
+              <p className="text-sm">Pradip Khamkar</p>
+              <p className="text-[0.6rem] text-slate-300">
                 khamkarpradip20@gmail.com
               </p>
             </div>
           </div>
 
-          <div className="max-h-[98%] overflow-auto mt-8">
+          <div className="max-h-[98%] overflow-auto mt-5 text-[0.8rem]">
             <div className="px-2 gap-2 flex flex-col">
               {options.map((option, index) => {
                 const { Icon, label, path, shortKey } = option;
@@ -145,10 +147,10 @@ const Sidebar = () => {
                             ? " text-white"
                             : "text-black dark:text-white"
                         } `}
-                        width={20}
-                        height={20}
+                        width={18}
+                        height={18}
                       />
-                      <p className="text-sm">{label}</p>
+                      <p>{label}</p>
                     </div>
                     <p>{shortKey}</p>
                   </div>
@@ -177,10 +179,10 @@ const Sidebar = () => {
                             ? " text-white"
                             : "text-black dark:text-white"
                         } `}
-                        width={20}
-                        height={20}
+                        width={18}
+                        height={18}
                       />
-                      <p className="text-sm">{label}</p>
+                      <p>{label}</p>
                     </div>
                     <p>{shortKey}</p>
                   </div>
@@ -192,7 +194,7 @@ const Sidebar = () => {
 
         <div className="px-2 gap-2 flex flex-col backdrop-blur-md">
           <div className="flex gap-2 items-center  p-2 justify-between rounded-lg">
-            <p className="text-sm">Dark Mode</p>
+            <p>Theme</p>
             <ThemeSwitch checked={!isDarkMode} onChange={toggleTheme} />
           </div>
         </div>

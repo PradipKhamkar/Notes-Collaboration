@@ -27,16 +27,16 @@ const ThemeSwitch = (props: SwitchProps) => {
           {...getWrapperProps()}
           className={slots.wrapper({
             class: [
-              "w-7 h-7",
+              "w-6 h-6",
               "flex items-center justify-center",
               "rounded-lg bg-default-100 hover:bg-default-200",
             ],
           })}
         >
           {isSelected ? (
-            <Sun01Icon width={20} height={20} color="white" />
+            <Sun01Icon width={18} height={18} color="white" />
           ) : (
-            <Moon02Icon width={20} height={20} />
+            <Moon02Icon width={18} height={18} />
           )}
         </div>
       </Component>
