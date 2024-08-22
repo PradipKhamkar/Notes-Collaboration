@@ -25,7 +25,7 @@ Welcome to the Note Collaboration Application! This project is a comprehensive n
 
 ## 🛠 Tools and Technologies
 
-- **Frontend**: React.js, TypeScript
+- **Frontend**: React.js,
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Real-time**: Socket.IO
