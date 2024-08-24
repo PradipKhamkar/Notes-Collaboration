@@ -1,29 +1,16 @@
-class ApiError extends Error {
-  statusCode: number;
-  message = "Something went wrong";
-  errors = [];
-  stack = "";
-  data = null;
-  success = false;
-  constructor(
-    statusCode: number,
-    message = "Something went wrong",
-    errors = [],
-    stack = ""
-  ) {
-    super(message);
-    this.statusCode = statusCode;
-    this.data = null;
-    this.message = message;
-    this.success = false;
-    this.errors = errors;
+import { Response } from "express";
 
-    if (stack) {
-      this.stack = stack;
-    } else {
-      Error.captureStackTrace(this, this.constructor);
-    }
-  }
-}
+const sendError = (
+  res: Response,
+  statusCode: number,
+  message = "Somethings is wrong",
+  data = {}
+) => {
+  res.status(statusCode).json({
+    message,
+    data,
+    success: false,
+  });
+};
 
-export { ApiError };
+export default sendError;
