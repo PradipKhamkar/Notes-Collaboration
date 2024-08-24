@@ -15,7 +15,7 @@ export const findUserByUserName = async (username: string) =>
 export const updateUser = async (userId: string, data: IUSER) =>
   await User.findByIdAndUpdate(userId, data);
 
-export const findUserByEmailAndEmail = async (
-  username: string,
-  email: string
-) => await User.findOne({ $or: [{ username }, { email }] });
+// export const findUserByEmail = async (
+//   username: string,
+//   email: string
+// ) => await User.findOne({ $or: [{ username }, { email }] });
