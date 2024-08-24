@@ -33,6 +33,9 @@ const noteSchema = new Schema<INOTE>(
       type: Schema.Types.ObjectId,
       ref: "folders",
     },
+    pin_at: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );
