@@ -7,6 +7,7 @@ const userSchema = new Schema<IUSER>(
   {
     username: {
       type: String,
+      trim: true,
       required: [true, "username required"],
       lowercase: true,
       unique: true,
@@ -14,10 +15,13 @@ const userSchema = new Schema<IUSER>(
     },
     password: {
       type: String,
+      trim: true,
       required: [true, "password required"],
+      minlength: [6, "invaild password"],
     },
     email: {
       type: String,
+      trim: true,
       unique: true,
       required: [true, "email required!"],
       loadClass: true,
