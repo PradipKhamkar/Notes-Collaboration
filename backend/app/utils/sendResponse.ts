@@ -6,7 +6,7 @@ const sendResponse = (
   data: {},
   message = ""
 ) => {
-  response.status(statusCode).json({
+  res.status(statusCode).json({
     success: true,
     message,
     data,
