@@ -8,7 +8,7 @@ export interface IUSER {
   email: string;
   password: string;
   refresh_token: string;
-  created_at: Date;
+  created_at?: Date;
   avatar: IAVATAR;
 }
 
