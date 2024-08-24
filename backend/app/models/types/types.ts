@@ -18,6 +18,7 @@ export interface INOTECONFIG {
     url?: string;
   };
 }
+
 export interface INOTE {
   title: string;
   data: string;
@@ -25,4 +26,14 @@ export interface INOTE {
   folder: string | undefined;
   created_by: string | undefined;
   config: INOTECONFIG;
+}
+
+export interface IFOLDERCONFIG {
+  icon: string;
+}
+export interface IFOLDER {
+  title: string;
+  pin_at: Date;
+  config: IFOLDERCONFIG;
+  created_by: string | undefined;
 }
