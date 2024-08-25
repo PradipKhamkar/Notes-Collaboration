@@ -32,9 +32,11 @@ const noteSchema = new Schema<INOTE>(
     folder: {
       type: Schema.Types.ObjectId,
       ref: "folders",
+      default: null,
     },
     pin_at: {
       type: Date,
+      default: null,
     },
   },
   { timestamps: true }
