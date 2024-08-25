@@ -54,8 +54,6 @@ userSchema.methods.generateAccessToken = async function () {
   return jwt.sign(
     {
       _id: this._id,
-      email: this.email,
-      username: this.username,
     },
     process.env.ACCESS_TOKEN_SECRET || "",
     {
@@ -68,8 +66,6 @@ userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      email: this.email,
-      username: this.username,
     },
     process.env.REFRESH_TOKEN_SECRET || "",
     {
