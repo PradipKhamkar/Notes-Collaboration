@@ -109,7 +109,7 @@ export const logoutUser = asyncHandler(
   }
 );
 
-export const updateUser = asyncHandler(
+export const updateAccountDetails = asyncHandler(
   async (request: Request, response: Response) => {
     if (Object.keys(request.body).length === 0)
       throwError(400, "⚠️ No data provided.");
@@ -119,16 +119,33 @@ export const updateUser = asyncHandler(
     const data = { ...request.body };
     delete data["_id"];
     delete data["refreshToken"];
+    delete data["password"];
+
     /* @ts-ignore */
     await updateUserById(request?.user?._id, data);
     response
       .status(200)
-      .json(
-        new ApiResponse(
-          200,
-          {},
-          "✅ User data updated successfully! Your changes have been saved."
-        )
-      );
+      .json(new ApiResponse(200, {}, "🎉 User data updated successfully!"));
+  }
+);
+
+export const updateUserPassword = asyncHandler(
+  async (request: Request, response: Response) => {
+    const { oldPassword, newPassword } = request.body;
+    if ([oldPassword, newPassword].some((value) => isEmpty(value)))
+      throwError(400, "🚫 All fields are required.");
+    /* @ts-ignore */
+    const user = await findUserById(request.user._id, "");
+    if (!user) throwError(404, "🚫 User not found.");
+    /* @ts-ignore */
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+    if (!isPasswordCorrect) throwError(400, "🔒 Invalid password");
+    /* @ts-ignore */
+    user.password = newPassword;
+    /* @ts-ignore */
+    await user.save();
+    response
+      .status(200)
+      .json(new ApiResponse(200, {}, "🎉 Your password updated successfully!"));
   }
 );

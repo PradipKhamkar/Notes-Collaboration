@@ -3,8 +3,8 @@ import User from "../models/user.models";
 
 export const createUser = async (data: IUSER) => await User.create({ ...data });
 
-export const findUserById = async (userId: string) =>
-  await User.findById(userId).select("-password");
+export const findUserById = async (userId: string, select = "-password") =>
+  await User.findById(userId).select(select);
 
 export const findUserByEmail = async (email: string) =>
   await User.findOne({ email }).select("-password");
