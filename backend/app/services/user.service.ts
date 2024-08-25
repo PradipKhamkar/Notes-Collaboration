@@ -10,7 +10,7 @@ export const findUserByEmail = async (email: string) =>
   await User.findOne({ email }).select("-password");
 
 export const findUserByUserName = async (username: string) =>
-  await User.findOne({ username }).select("-password");
+  await User.findOne({ username }).select("-password -refreshToken");
 
 export const updateUser = async (userId: string, data: IUSER) =>
   await User.findByIdAndUpdate(userId, data);

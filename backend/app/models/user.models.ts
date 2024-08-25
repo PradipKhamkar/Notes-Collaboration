@@ -32,6 +32,9 @@ const userSchema = new Schema<IUSER>(
       type: Date,
       default: new Date(Date.now()),
     },
+    refreshToken: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

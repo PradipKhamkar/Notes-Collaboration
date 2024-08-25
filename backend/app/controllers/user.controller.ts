@@ -1,8 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { isEmail, isEmpty } from "validator";
+import User from "../models/user.models";
 import {
   createUser,
   findUserByEmail,
+  findUserById,
   findUserByUserName,
 } from "../services/user.service";
 import ApiError from "../utils/ApiError";
@@ -16,7 +18,6 @@ const throwError = (status: number, message: string) => {
 export const registerUser = asyncHandler(
   async (request: Request, response: Response, next: NextFunction) => {
     const { username, password, email } = request.body;
-    console.log("request", request);
     if ([username, password, email].some((value) => isEmpty(value || "")))
       throwError(400, "🚫 All fields are required");
     if (password.length < 6)
@@ -35,7 +36,7 @@ export const registerUser = asyncHandler(
       username,
       password,
       email,
-      refresh_token: "",
+      refreshToken: "",
       avatar: { public_id: "", url: "" },
     });
     if (!newUser)
@@ -50,6 +51,42 @@ export const registerUser = asyncHandler(
           avatar: newUser.avatar,
         },
         "🎉 User registered successfully! Welcome aboard."
+      )
+    );
+  }
+);
+
+//FIXME: TYPE ERROR
+export const loginUser = asyncHandler(
+  async (request: Request, response: Response, next: NextFunction) => {
+    const { username, password } = request.body;
+    if ([username, password].some((value) => isEmpty(value))) {
+      throwError(400, "🚫 All fields are required");
+    }
+    const user: any = await User.findOne({
+      $or: [{ username }, { email: username }],
+    });
+
+    if (!user)
+      throwError(401, "❌ Invalid credentials. Please check your username");
+    const isPasswordCorrect = await user.isPasswordCorrect(password);
+    if (!isPasswordCorrect)
+      throwError(401, "🔑 Incorrect password. Please try again.");
+    const refreshToken = await user.generateRefreshToken();
+    const accessToken = await user.generateAccessToken();
+    user.refreshToken = refreshToken;
+    await user.save();
+    const loggedUser = await findUserByUserName(username);
+
+    response.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          loggedUser,
+          accessToken,
+          refreshToken,
+        },
+        "🎉 Logged in successfully!"
       )
     );
   }
