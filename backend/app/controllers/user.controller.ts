@@ -114,7 +114,7 @@ export const updateAccountDetails = asyncHandler(
     if (Object.keys(request.body).length === 0)
       throwError(400, "⚠️ No data provided.");
     /* @ts-ignore */
-    const user = findUserById(request.user._id);
+    const user = await findUserById(request.user._id);
     if (!user) throwError(404, "🚫 User not found.");
     const data = { ...request.body };
     delete data["_id"];

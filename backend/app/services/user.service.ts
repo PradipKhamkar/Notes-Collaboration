@@ -13,7 +13,7 @@ export const findUserByUserName = async (username: string) =>
   await User.findOne({ username }).select("-password -refreshToken");
 
 export const updateUserById = async (userId: string, data: any) =>
-  await User.findByIdAndUpdate(userId, data);
+  await User.findByIdAndUpdate(userId, data, { new: true });
 
 // export const findUserByEmail = async (
 //   username: string,
