@@ -6,6 +6,7 @@ import {
   findUserByEmail,
   findUserById,
   findUserByUserName,
+  updateUser,
 } from "../services/user.service";
 import ApiError from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
@@ -72,11 +73,15 @@ export const loginUser = asyncHandler(
     const isPasswordCorrect = await user.isPasswordCorrect(password);
     if (!isPasswordCorrect)
       throwError(401, "🔑 Incorrect password. Please try again.");
+
     const refreshToken = await user.generateRefreshToken();
     const accessToken = await user.generateAccessToken();
     user.refreshToken = refreshToken;
     await user.save();
-    const loggedUser = await findUserByUserName(username);
+
+    const loggedUser = await User.findOne({
+      $or: [{ username }, { email: username }],
+    }).select("-password -refreshToken");
 
     response.status(200).json(
       new ApiResponse(
@@ -89,5 +94,17 @@ export const loginUser = asyncHandler(
         "🎉 Logged in successfully!"
       )
     );
+  }
+);
+
+//FIXME: TYPE ERROR
+export const logoutUser = asyncHandler(
+  async (request: Request, response: Response, next: NextFunction) => {
+    /* @ts-ignore */
+    const userId = request.user._id;
+    await updateUser(userId, { refreshToken: "" });
+    response
+      .status(200)
+      .json(new ApiResponse(200, {}, "⚡ Logged out successfully!"));
   }
 );
