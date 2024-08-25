@@ -5,6 +5,7 @@ import {
   logoutUser,
   updateAccountDetails,
   updateUserPassword,
+  refreshAccessToken,
 } from "../controllers/user.controller";
 import accessTokenVerifier from "../middlewares/accessTokenVerifier";
 
@@ -15,5 +16,6 @@ route.post("/login", loginUser);
 route.get("/logout", accessTokenVerifier, logoutUser);
 route.put("/update", accessTokenVerifier, updateAccountDetails);
 route.put("/update-password", accessTokenVerifier, updateUserPassword);
+route.get("/refresh-token", refreshAccessToken);
 
 export default route;

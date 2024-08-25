@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { isEmail, isEmpty } from "validator";
+import { isEmail, isEmpty, isJWT } from "validator";
 import User from "../models/user.models";
 import {
   createUser,
@@ -11,6 +11,7 @@ import {
 import ApiError from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
 import asyncHandler from "../utils/asyncRequestHandler";
+import jwt from "jsonwebtoken";
 
 const throwError = (status: number, message: string) => {
   throw new ApiError(status, message);
@@ -147,5 +148,43 @@ export const updateUserPassword = asyncHandler(
     response
       .status(200)
       .json(new ApiResponse(200, {}, "🎉 Your password updated successfully!"));
+  }
+);
+
+export const refreshAccessToken = asyncHandler(
+  async (request: Request, response: Response) => {
+    const { incomingRefreshToken } = request.body;
+    if (!isJWT(incomingRefreshToken))
+      throwError(401, "🚫 Invalid refresh token");
+    try {
+      const decodedToken = jwt.verify(
+        incomingRefreshToken,
+        process.env.REFRESH_TOKEN_SECRET || ""
+      );
+      /* @ts-ignore */
+      const user = await findUserById(decodedToken._id);
+      if (!user) throwError(404, "🚫 User not found");
+      if (user?.refreshToken !== incomingRefreshToken)
+        throwError(401, "🔒 Refresh token is expired");
+      /* @ts-ignore */
+      const accessToken = await user.generateAccessToken();
+      /* @ts-ignore */
+      const refreshToken = await user.generateRefreshToken();
+      /* @ts-ignore */
+      user.refreshToken = refreshToken;
+      /* @ts-ignore */
+      await user.save();
+      response
+        .status(200)
+        .json(
+          new ApiResponse(
+            200,
+            { refreshToken, accessToken },
+            "🎉 Token refreshed successfully"
+          )
+        );
+    } catch (error) {
+      throwError(401, "🚫 Invalid refresh token");
+    }
   }
 );
