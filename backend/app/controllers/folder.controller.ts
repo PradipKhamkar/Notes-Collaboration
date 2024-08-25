@@ -12,12 +12,13 @@ const throwError = (statusCode: number, message: string) => {
 export const createFolder = asyncHandler(
   async (req: Request, res: Response) => {
     const { name, config } = req.body;
-    if (isEmpty(name)) throwError(400, "Folder name required!");
+    if (isEmpty(name)) throwError(400, "📁 Folder name is required!");
     const newFolder = await Folder.create(name);
-    if (!newFolder) throwError(400, "somering");
+    if (!newFolder)
+      throwError(500, "⚠️ Something went wrong. Unable to create the folder!");
     res
       .status(201)
-      .json(new ApiResponse(201, newFolder, "folder created successfully"));
+      .json(new ApiResponse(201, newFolder, "🎉 Folder created successfully!"));
   }
 );
 
