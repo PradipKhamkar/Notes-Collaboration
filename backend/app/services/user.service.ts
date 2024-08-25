@@ -12,7 +12,7 @@ export const findUserByEmail = async (email: string) =>
 export const findUserByUserName = async (username: string) =>
   await User.findOne({ username }).select("-password -refreshToken");
 
-export const updateUser = async (userId: string, data: any) =>
+export const updateUserById = async (userId: string, data: any) =>
   await User.findByIdAndUpdate(userId, data);
 
 // export const findUserByEmail = async (

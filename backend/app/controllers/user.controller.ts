@@ -6,7 +6,7 @@ import {
   findUserByEmail,
   findUserById,
   findUserByUserName,
-  updateUser,
+  updateUserById,
 } from "../services/user.service";
 import ApiError from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
@@ -102,9 +102,33 @@ export const logoutUser = asyncHandler(
   async (request: Request, response: Response, next: NextFunction) => {
     /* @ts-ignore */
     const userId = request.user._id;
-    await updateUser(userId, { refreshToken: "" });
+    await updateUserById(userId, { refreshToken: "" });
     response
       .status(200)
       .json(new ApiResponse(200, {}, "⚡ Logged out successfully!"));
+  }
+);
+
+export const updateUser = asyncHandler(
+  async (request: Request, response: Response) => {
+    if (Object.keys(request.body).length === 0)
+      throwError(400, "⚠️ No data provided.");
+    /* @ts-ignore */
+    const user = findUserById(request.user._id);
+    if (!user) throwError(404, "🚫 User not found.");
+    const data = { ...request.body };
+    delete data["_id"];
+    delete data["refreshToken"];
+    /* @ts-ignore */
+    await updateUserById(request?.user?._id, data);
+    response
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          {},
+          "✅ User data updated successfully! Your changes have been saved."
+        )
+      );
   }
 );
