@@ -32,7 +32,7 @@ export interface IFOLDERCONFIG {
   icon: string;
 }
 export interface IFOLDER {
-  title: string;
+  name: string;
   pin_at: Date;
   config: IFOLDERCONFIG;
   created_by: string | undefined;

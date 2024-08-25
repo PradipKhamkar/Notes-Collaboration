@@ -3,7 +3,7 @@ import { IFOLDER } from "./types/types";
 
 const folderSchema = new Schema<IFOLDER>(
   {
-    title: {
+    name: {
       type: String,
       required: [true, "title required"],
       trim: true,
@@ -20,6 +20,7 @@ const folderSchema = new Schema<IFOLDER>(
     },
     pin_at: {
       type: Date,
+      default: null,
     },
   },
   { timestamps: true }
