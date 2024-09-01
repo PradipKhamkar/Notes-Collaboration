@@ -1,6 +1,5 @@
-import Sidenav from "./component/layouts/Sidenav";
 import Wrapper from "./component/shared/Wrapper";
-import Layouts from "./pages/Layouts";
+import Layouts from "./component/layouts/Layouts";
 
 const App = () => {
   return (

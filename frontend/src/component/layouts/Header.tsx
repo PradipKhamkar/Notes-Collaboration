@@ -14,11 +14,11 @@ const Header = (props: IPROPS) => {
   const { toggleSideNav, sideNavOpen } = props;
   return (
     <>
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center dark:!text-white">
         <div className="flex justify-center items-center gap-3">
           <SidebarRightIcon
             onClick={() => toggleSideNav(!sideNavOpen)}
-            className="w-5 h-5 cursor-pointer"
+            className="w-5 h-5 cursor-pointer dark:text-white"
           />
           <div className="items-center hidden md:flex gap-2">
             <Avatar
@@ -30,8 +30,13 @@ const Header = (props: IPROPS) => {
         </div>
         <div className="flex gap-3 justify-center items-center">
           <Input placeholder="Type to search..!" suffix={<SearchIcon />} />
-          <NotificationIcon className="w-6 h-6 cursor-pointer" />
-          <Popover content={<>JUST OPEN</>} title="Title" trigger="click">
+          <NotificationIcon className="w-6 h-6 cursor-pointer dark:text-white" />
+          <Popover
+            content={<>JUST OPEN</>}
+            title="Title"
+            trigger="click"
+            className="dark:!bg-[#2D3033]"
+          >
             <Avatar
               className="cursor-pointer"
               src="https://avatars.githubusercontent.com/u/119717646?v=4"

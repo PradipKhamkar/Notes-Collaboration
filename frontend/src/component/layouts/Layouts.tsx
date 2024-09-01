@@ -1,25 +1,28 @@
 import { Divider, Layout } from "antd";
 import { useState } from "react";
-import Footer from "../component/layouts/Footer";
-import Header from "../component/layouts/Header";
-import Sidenav from "../component/layouts/Sidenav";
-import { ConditionalRender } from "../component/shared/ConditionalRender";
+import Footer from "./Footer";
+import Header from "./Header";
+import Sidenav from "./Sidenav";
+import { ConditionalRender } from "../shared/ConditionalRender";
 const { Sider, Content } = Layout;
 
 const Layouts = () => {
   const [sideNavOpen, setSideNavOpen] = useState<boolean>(true);
   return (
-    <Layout className="h-[100vh] overflow-hidden">
-      <Layout.Header className="bg-white flex flex-col justify-center items-center">
+    <Layout className="h-[100vh] overflow-hidden !bg-transparent">
+      <Layout.Header className="dark:bg-[#2D3033] bg-white flex flex-col justify-center items-center">
         <Header sideNavOpen={sideNavOpen} toggleSideNav={setSideNavOpen} />
       </Layout.Header>
-      <Layout>
+      <Layout className="!bg-transparent">
         <ConditionalRender condition={sideNavOpen}>
-          <Sider width="23%" className="overflow-auto  !bg-white">
+          <Sider
+            width="23%"
+            className="overflow-auto !bg-white dark:!bg-[#2D3033] "
+          >
             <Sidenav />
           </Sider>
         </ConditionalRender>
-        <Content className="px-2 bg-[#eee]">
+        <Content className="p-2">
           <div className="!rounded-lg">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
             atque repellendus maxime reprehenderit ducimus quaerat aspernatur
@@ -36,7 +39,7 @@ const Layouts = () => {
           </div>
         </Content>
       </Layout>
-      <Layout.Footer className="p-0 m-0 bg-white">
+      <Layout.Footer className="p-0 m-0 dark:bg-[#2D3033] bg-white">
         <Footer />
       </Layout.Footer>
     </Layout>
