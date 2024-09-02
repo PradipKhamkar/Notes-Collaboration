@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, Input, Popover } from "antd";
+import { Avatar, Badge, Button, Divider, Input, Popover } from "antd";
 import {
   MoonIcon,
   NotificationIcon,
@@ -30,7 +30,10 @@ const Header = (props: IPROPS) => {
         </div>
         <div className="flex gap-3 justify-center items-center">
           <Input placeholder="Type to search..!" suffix={<SearchIcon />} />
-          <NotificationIcon className="w-6 h-6 cursor-pointer dark:text-white" />
+          <div className="flex relative">
+            <Badge className="absolute -top-8 left-2" status="processing" />
+            <NotificationIcon className="w-4 h-4 cursor-pointer dark:text-white" />
+          </div>
           <Popover
             content={<>JUST OPEN</>}
             title="Title"

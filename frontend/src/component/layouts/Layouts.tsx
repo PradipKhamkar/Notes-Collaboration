@@ -4,10 +4,15 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Sidenav from "./Sidenav";
 import { ConditionalRender } from "../shared/ConditionalRender";
+import NoteCard from "../shared/NoteCard";
+import { dummyNotesData } from "../../data/dummyNote";
+import { folderData } from "../../data/dummyFolders";
+import FolderCard from "../shared/FolderCard";
 const { Sider, Content } = Layout;
 
 const Layouts = () => {
   const [sideNavOpen, setSideNavOpen] = useState<boolean>(true);
+
   return (
     <Layout className="h-[100vh] overflow-hidden !bg-transparent">
       <Layout.Header className="dark:bg-[#2D3033] bg-white flex flex-col justify-center items-center">
@@ -22,20 +27,25 @@ const Layouts = () => {
             <Sidenav />
           </Sider>
         </ConditionalRender>
-        <Content className="p-2">
-          <div className="!rounded-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-            atque repellendus maxime reprehenderit ducimus quaerat aspernatur
-            totam, magnam rerum nobis, officia eveniet consectetur? Perspiciatis
-            maxime sapiente, saepe dicta, doloremque hic sequi consequuntur sed
-            excepturi aut consequatur odit ipsa. Nisi aut est mollitia
-            cupiditate doloribus quia aliquid eum, error ut consequatur quas
-            nemo non quisquam atque blanditiis magnam fugiat aliquam quo labore
-            cum impedit, explicabo vero quibusdam rerum. Sequi similique ducimus
-            dolores quod, voluptatem numquam quas pariatur aperiam
-            necessitatibus! Dolor quaerat soluta consequatur, molestiae natus id
-            debitis saepe. Eveniet laborum accusamus debitis placeat voluptates.
-            Iusto eius ipsam eum et mollitia in.
+        <Content className="p-2 overflow-auto">
+          <div className="!rounded-lg flex justify-start items-center gap-2 flex-wrap !w-full overflow-auto">
+            {folderData.map((data) => (
+              <FolderCard
+                collaborators={data.collaborators}
+                config={data.config}
+                created_by={data.created_by}
+                pin_at={data.pin_at}
+                name={data.name}
+              />
+            ))}
+
+            {/* {dummyNotesData.map((data) => (
+              <NoteCard
+                data={data.data}
+                title={data.title}
+                config={data.config}
+              />
+            ))} */}
           </div>
         </Content>
       </Layout>
