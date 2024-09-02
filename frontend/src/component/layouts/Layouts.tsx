@@ -1,4 +1,4 @@
-import { Divider, Layout } from "antd";
+import { Layout } from "antd";
 import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -6,8 +6,7 @@ import Sidenav from "./Sidenav";
 import { ConditionalRender } from "../shared/ConditionalRender";
 import NoteCard from "../shared/NoteCard";
 import { dummyNotesData } from "../../data/dummyNote";
-import { folderData } from "../../data/dummyFolders";
-import FolderCard from "../shared/FolderCard";
+import FloatAction from "../shared/FloatAction";
 const { Sider, Content } = Layout;
 
 const Layouts = () => {
@@ -29,7 +28,7 @@ const Layouts = () => {
         </ConditionalRender>
         <Content className="p-2 overflow-auto">
           <div className="!rounded-lg flex justify-start items-center gap-2 flex-wrap !w-full overflow-auto">
-            {folderData.map((data) => (
+            {/* {folderData.map((data) => (
               <FolderCard
                 collaborators={data.collaborators}
                 config={data.config}
@@ -37,21 +36,22 @@ const Layouts = () => {
                 pin_at={data.pin_at}
                 name={data.name}
               />
-            ))}
+            ))} */}
 
-            {/* {dummyNotesData.map((data) => (
+            {dummyNotesData.map((data) => (
               <NoteCard
                 data={data.data}
                 title={data.title}
                 config={data.config}
               />
-            ))} */}
+            ))}
           </div>
         </Content>
       </Layout>
       <Layout.Footer className="p-0 m-0 dark:bg-[#2D3033] bg-white">
         <Footer />
       </Layout.Footer>
+      <FloatAction />
     </Layout>
   );
 };
