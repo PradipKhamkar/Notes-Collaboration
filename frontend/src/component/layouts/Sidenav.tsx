@@ -1,14 +1,100 @@
 import {
   DatabaseSyncIcon,
+  DeleteIcon,
+  EditIcon,
   MoonIcon,
+  NavigationIcon,
   ShareKnowledgeIcon,
   SunIcon,
 } from "../Icons/Icon";
 
-import { FolderTwoTone } from "@ant-design/icons";
-
-import { Collapse, Segmented } from "antd";
+import {
+  EditOutlined,
+  FolderTwoTone,
+  MoreOutlined,
+  ShareAltOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Avatar, Button, Collapse, Dropdown, MenuProps, Segmented } from "antd";
 import useTheme, { Mode } from "../../hooks/useTheme";
+import { folders } from "../../data/dummyFolders";
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <>
+        <Button
+          type="plain"
+          icon={<EditIcon className="w-3 h-3" />}
+          size="small"
+        >
+          Edit
+        </Button>
+      </>
+    ),
+  },
+  { type: "divider" },
+  {
+    key: "2",
+    label: (
+      <>
+        <Button
+          type="plain"
+          icon={<NavigationIcon className="w-3 h-3" />}
+          size="small"
+        >
+          Share
+        </Button>
+      </>
+    ),
+  },
+  { type: "divider" },
+  {
+    key: "3",
+    label: (
+      <>
+        <Button
+          type="plain"
+          icon={<DeleteIcon className="w-3 h-3" />}
+          size="small"
+        >
+          Delete
+        </Button>
+      </>
+    ),
+  },
+  { type: "divider" },
+  {
+    key: "4",
+    label: (
+      <>
+        <Button
+          type="plain"
+          icon={<DatabaseSyncIcon className="w-3 h-3" />}
+          size="small"
+        >
+          Archived
+        </Button>
+      </>
+    ),
+  },
+  { type: "divider" },
+  {
+    key: "5",
+    label: (
+      <>
+        <Button
+          type="plain"
+          icon={<UserOutlined className="w-3 h-3" />}
+          size="small"
+        >
+          Collaborate
+        </Button>
+      </>
+    ),
+  },
+];
 
 const Sidenav = () => {
   const { mode, toggleMode } = useTheme();
@@ -34,13 +120,26 @@ const Sidenav = () => {
                   </div>
                 ),
                 children: (
-                  <div className="flex gap-3 flex-col">
-                    <div className="flex justify-between items-center cursor-pointer">
-                      <div className="flex items-center gap-2">
-                        <FolderTwoTone className="!w-5 !h-5" />
-                        <p className="text-sm">Untitled</p>
-                      </div>
-                    </div>
+                  <div className="flex gap-5 flex-col max-h-52 overflow-auto hide-scrollbar">
+                    {folders.map((item) => {
+                      return (
+                        <>
+                          <div className="flex  justify-between items-center cursor-pointer">
+                            <div className="flex justify-center items-center gap-2">
+                              <Avatar size="small">{item.config.icon}</Avatar>
+                              {item.name}
+                            </div>
+                            <Dropdown
+                              menu={{ items }}
+                              trigger={["click"]}
+                              placement="bottomLeft"
+                            >
+                              <MoreOutlined />
+                            </Dropdown>
+                          </div>
+                        </>
+                      );
+                    })}
                   </div>
                 ),
               },
