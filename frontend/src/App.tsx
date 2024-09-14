@@ -1,10 +1,10 @@
-import { Notification03Icon } from "hugeicons-react";
+import Layout from "./components/layouts/Layout";
 
 const App = () => {
   return (
-    <div className="text-red-900 bg-green-500 text-xs">
-      <Notification03Icon size={20} mode="hgi-duotone hgi-notification-03" />
-    </div>
+    <>
+      <Layout />
+    </>
   );
 };
 
