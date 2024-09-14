@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <div className="flex  relative">
       {sideBarVisible && (
-        <div className="h-screen bg-white z-10 !w-full md:min-w-[20%]  absolute border-r-[0.2px]  md:relative">
+        <div className="h-screen  bg-white z-10 !w-full md:min-w-[20%]  absolute border-r-[0.2px]  md:relative">
           <Sidebar setVisible={setSidebarVisible} />
         </div>
       )}
@@ -16,14 +16,14 @@ const Layout = () => {
         <div
           className={`${
             sideBarVisible ? "!w-[80%]" : "!w-full"
-          } !bg-white fixed border-b-[0.2px]`}
+          }  fixed border-b-[#eeee] border-b-[0.2px] bg-white`}
         >
           <Header
             setSidebarVisible={setSidebarVisible}
             sidebarVisible={sideBarVisible}
           />
         </div>
-        <div className="overflow-auto !h-screen pt-16 px-3 bg-[#eeee] ">
+        <div className="overflow-auto !h-screen pt-16 px-3 ">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed
           necessitatibus nemo atque deleniti enim odio? Porro consectetur soluta
           animi quis. Doloribus dolorem perferendis iste ducimus beatae nihil
