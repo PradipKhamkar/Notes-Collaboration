@@ -1,12 +1,5 @@
-import Wrapper from "./component/shared/Wrapper";
-import Layouts from "./component/layouts/Layouts";
-
 const App = () => {
-  return (
-    <Wrapper>
-      <Layouts />
-    </Wrapper>
-  );
+  return <div>App</div>;
 };
 
 export default App;
